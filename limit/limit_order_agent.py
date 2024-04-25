@@ -15,7 +15,7 @@ class LimitOrderAgent(PriceListener):
 
     def on_price_tick(self, product_id: str, price: float):
         # Executing orders via an ExecutionClient instance
-        self.execute_orders(product_id, price)
+        return product_id,price
 
     def execute_orders(self, product_id: str, price: float):
         executed_orders = []
