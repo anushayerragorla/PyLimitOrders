@@ -29,7 +29,7 @@ class LimitOrderAgentTest(unittest.TestCase):
 
     def test_execute_wrong_order(self):
         self.limit_order_agent.add_order('wrong', 'IBM', 1000, 101.0)
-        self.limit_order_agent.price_tick('IBM', 102.0)
+        self.limit_order_agent.on_price_tick('IBM', 102.0)
         self.assertTrue(self.limit_order_agent.orders)
         print("test_execute_sell_order Passed Successfully")
 
