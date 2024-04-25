@@ -31,13 +31,13 @@ class LimitOrderAgent(PriceListener):
                         self.execution_client.sell(self, order_product_id, amount)
                         executed_orders.append(order)
                         # Removing the sold order
-                        self.orders.remove(order)
+                        # self.orders.remove(order)
                     else:
                         raise ExecutionException
                 except ExecutionException:
                     print(f"Failed to place an order due to invalid operation")
         for order in self.orders:
-            self.orders.remove(order)
+            self.orders.remove(order) if flag != 'buy' else ""
         print("Executed Orders::",executed_orders)
 
     def add_order(self, flag: str, product_id: str, amount: int, limit: float):
