@@ -1,5 +1,6 @@
 from trading_framework.execution_client import ExecutionClient, ExecutionException
 from trading_framework.price_listener import PriceListener
+import requests
 
 
 class LimitOrderAgent(PriceListener):
@@ -13,9 +14,11 @@ class LimitOrderAgent(PriceListener):
         self.execution_client = execution_client
         self.orders = []
 
-    def on_price_tick(self, product_id: str, price: float):
-        # Executing orders via an ExecutionClient instance
-        return product_id,price
+    def on_price_tick(self, product_id: str):
+        # provide the product_id, Api will return the product id along with the current market price of product id"
+        pylimit_uri = "product_uri/" + product_id
+        respone = requests.get(pylimit_uri)
+        return respone.json()
 
     def execute_orders(self, product_id: str, price: float):
         executed_orders = []
