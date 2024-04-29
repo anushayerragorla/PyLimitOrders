@@ -17,8 +17,8 @@ class LimitOrderAgent(PriceListener):
     def on_price_tick(self, product_id: str):
         # provide the product_id, Api will return the product id along with the current market price of product id"
         pylimit_uri = "product_uri/" + product_id
-        respone = requests.get(pylimit_uri)
-        return respone.json()
+        respone = requests.get(pylimit_uri).json()
+        self.execute_orders(respone["product_id", respone["price"]])
 
     def execute_orders(self, product_id: str, price: float):
         executed_orders = []
